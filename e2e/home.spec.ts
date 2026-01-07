@@ -30,4 +30,12 @@ test.describe('ホームページ', () => {
     const logo = page.getByAltText('Next.js logo');
     await expect(logo).toBeVisible();
   });
+
+  test('存在しない要素を探す（テスト失敗確認用）', async ({ page }) => {
+    await page.goto('/');
+
+    // わざと存在しない要素を探してテストを失敗させる
+    const nonExistentButton = page.getByRole('button', { name: '存在しないボタン' });
+    await expect(nonExistentButton).toBeVisible();
+  });
 });
